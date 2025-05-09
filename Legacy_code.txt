@@ -38,8 +38,11 @@ def listar_alunos_por_idade(idade_minima):
         if aluno['idade'] >= idade_minima:
             print(f"Nome: {aluno['nome']}, Idade: {aluno['idade']}, Matrícula: {aluno['matricula']}")
 
-def matriculas_existentes(): 
-    return [aluno['matricula'] for aluno in alunos]
+def matriculas_existentes():
+    matriculas = []
+    for aluno in alunos:
+        matriculas.append(aluno['matricula'])
+    return matriculas
 
 def salvar_alunos_em_arquivo():
     with open('alunos.txt', 'w') as f:
@@ -57,11 +60,15 @@ def carregar_alunos_de_arquivo():
         print("Arquivo de alunos não encontrado.")
 
 def ordenar_alunos_por_nome():
+    global alunos
     alunos.sort(key=lambda aluno: aluno['nome'])
 
 def buscar_aluno_por_nome(nome):
-    return [aluno for aluno in alunos if nome.lower() in aluno['nome'].lower()]
-
+    resultados = []
+    for aluno in alunos:
+        if nome.lower() in aluno['nome'].lower():
+            resultados.append(aluno)
+    return resultados
 
 # Função mal planejada
 def exibir_relatorio():
@@ -70,23 +77,28 @@ def exibir_relatorio():
     print("===========================")
 
 def aluno_existe(matricula):
-    return any(aluno['matricula'] == matricula for aluno in alunos)
+    for aluno in alunos:
+        if aluno['matricula'] == matricula:
+            return True
+    return False
+
+# Funções repetidas que fazem o mesmo
+def existe_aluno(matricula):
+    for a in alunos:
+        if a['matricula'] == matricula:
+            return True
+    return False
 
 def alunos_maiores_de_idade():
-    return [aluno for aluno in alunos if aluno['idade'] >= 18]
+    maiores = []
+    for aluno in alunos:
+        if aluno['idade'] >= 18:
+            maiores.append(aluno)
+    return maiores
 
 def limpar_lista_alunos():
     global alunos
     alunos = []
-
-def mostrar_detalhes_de_um_aluno(matricula):
-    aluno = buscar_aluno(matricula)
-    if aluno:
-        print(f"Nome: {aluno['nome']}")
-        print(f"Idade: {aluno['idade']}")
-        print(f"Matrícula: {aluno['matricula']}")
-    else:
-        print("Aluno não encontrado.")
 
 # Algumas funções desnecessárias
 def listar_todos_os_nomes():
