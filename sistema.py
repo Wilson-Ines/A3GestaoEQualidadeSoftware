@@ -43,7 +43,7 @@ class SistemaAlunos:
             return True
         return False
     
-    def salvar_dados(self)
+    def salvar_dados(self):
         with open(self.arquivo_dados, "w", encoding='utf-8') as f:
             json.dump([aluno.to_dict() for aluno in self.alunos], f, indent=4)
 
@@ -52,9 +52,8 @@ class SistemaAlunos:
             try:
                 with open(self.arquivo_dados, 'r', enconding= 'utf-8') as f:
                     dados = json.load(f)
-                    self.alunos = [Alunos(**aluno) for aluno in dados]
+                    self.alunos = [Aluno(**aluno) for aluno in dados]
             except Exception as e:
                 print(f"Erro ao carregar dados: {e}")
                 self.alunos = []
 
-                

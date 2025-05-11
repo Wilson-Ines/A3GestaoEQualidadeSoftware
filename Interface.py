@@ -41,8 +41,8 @@ def executar():
 
             elif opcao == '4':
                 matricula = input("Digite a matrícula do aluno: ")
-                novo_nome = input("Novo nome (pressione Enter para manter): ")
-                nova_idade = input("Nova idade (pressione Enter para manter): ")
+                novo_nome = input("Novo nome (pressione Enter para manter o nome já cadastrado): ")
+                nova_idade = input("Nova idade (pressione Enter para manter a idade já cadastrada): ")
                 idade_int = int(nova_idade) if nova_idade else None
                 if sistema.atualizar_aluno(matricula, novo_nome or None, idade_int):
                     print("Aluno atualizado.")
