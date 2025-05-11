@@ -47,12 +47,14 @@ class SistemaAlunos:
         with open(self.arquivo_dados, "w", encoding='utf-8') as f:
             json.dump([aluno.to_dict() for aluno in self.alunos], f, indent=4)
 
+
     def carregar_dados(self):
         if os.path.exists(self.arquivo_dados):
             try:
-                with open(self.arquivo_dados, 'r', enconding= 'utf-8') as f:
+                with open(self.arquivo_dados, 'r', encoding= 'utf-8') as f:
                     dados = json.load(f)
                     self.alunos = [Aluno(**aluno) for aluno in dados]
+
             except Exception as e:
                 print(f"Erro ao carregar dados: {e}")
                 self.alunos = []
